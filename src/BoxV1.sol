@@ -5,32 +5,28 @@ import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/U
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract BoxV1 is Initializable, UUPSUpgradeable,OwnableUpgradeable{
+contract BoxV1 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     uint256 internal number;
 
-        // @custom:oz-upgrades-unsafe-allow constructor
+    // @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
-        _disableInitializers();//do not let any initiallization happen
+        _disableInitializers(); //do not let any initiallization happen
     }
 
-    function initialized() public initializer{
-        __Ownable_init(msg.sender);//set owner to msg.sender
+    function initialized() public initializer {
+        __Ownable_init(msg.sender); //set owner to msg.sender
         __UUPSUpgradeable_init();
     }
 
-    function getNumber() external view returns (uint256){
+    function getNumber() external view returns (uint256) {
         return number;
-        
     }
 
-    function version() external view returns (uint256){
+    function version() external view returns (uint256) {
         return 1;
     }
 
-    function _authorizeUpgrade(address newImplementation) internal override onlyOwner{
-
-    }
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
     uint256[49] private __gap;
-
 }
